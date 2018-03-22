@@ -25,6 +25,29 @@ public class AccountMapperTestCase {
         System.out.println(account);
         // 5.关闭sqlSession
         sqlSession.close();
+    }
+
+    @Test
+    public void testFindAll() throws Exception {
+
+
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+
+
+    }
+
+    @Test
+    public void testInsert() throws Exception {
+
+
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+
 
     }
 
