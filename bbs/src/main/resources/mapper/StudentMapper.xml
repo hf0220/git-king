@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hjl.mapper.StudentMapper">
+
+    <resultMap id="baseMap" type="com.hjl.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="school_id" property="schoolId"/>
+    </resultMap>
+
+    <resultMap id="studentMap" type="com.hjl.entity.Student" extends="baseMap">
+        <association property="school" javaType="com.hjl.entity.school">
+            <id column="id" property="id"/>
+            <result column="school_name" property="schoolName"/>
+            <result column="tel" property="tel"/>
+        </association>
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultType="com.hjl.entity.Student">
+        SELECT
+            stu.id,
+            stu.name,
+            stu.age,
+            sch.id AS 'school.id',
+            sch.school_name AS 'school.name',
+            sch.tel AS 'school.tel'
+        FROM
+            t_student stu
+        INNER JOIN t_school sch ON stu.school_id = sch.id
+        WHERE
+        stu.id = #{id}
+    </select>
+
+    <select id="findByAll" resultMap="studentMap">
+         SELECT
+            stu.id,
+            stu.name,
+            stu.age,
+            sch.id AS 'school.id',
+            sch.school_name AS 'school.name',
+            sch.tel AS 'school.tel'
+        FROM
+            t_student stu
+        INNER JOIN t_school sch ON stu.school_id = sch.id
+    </select>
+
+    <resultMap id="studentMapWithTag" type="com.hjl.entity.Student" extends="baseMap">
+        <collection property="tagList" ofType="com.hjl.entity.Tag">
+            <id column="tid" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+    
+    <select id="findByIdWithTag" parameterType="int" resultMap="studentMapWithTag">
+        SELECT
+            stu.id,
+            stu. NAME,
+            stu.age,
+            stu.school_id,
+            sch.school_name,
+            sch.tel,
+            st.tid,
+            tag.tag_name
+        FROM
+            t_student stu
+        INNER JOIN t_school sch ON stu.id = sch.id
+        INNER JOIN t_stu_tag st ON stu.id = st.sid
+        INNER JOIN t_tag tag ON st.tid = tag.id
+        WHERE
+            stu.id = #{id}
+    </select>
+
+</mapper>

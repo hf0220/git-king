@@ -13,16 +13,16 @@
         SELECT * FROM t_account
     </select>
 
-    <select id="page" resultType="User" parameterType="map">
+    <select id="page" resultType="Account" parameterType="map">
         select * from t_account limit #{start}, #{size}
     </select>
 
     <insert id="save" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_account (name, tel) VALUES (#{name}, #{tel})
+        INSERT INTO t_account (name, address, tel) VALUES (#{name}, #{address}, #{tel})
     </insert>
 
-    <update id="update" parameterType="User">
-        update t_account set name = #{Name}, tel = #{tel}
+    <update id="update" parameterType="Account">
+        update t_account set name = #{name}, address = #{address} tel = #{tel}
         where id = #{id}
       </update>
 

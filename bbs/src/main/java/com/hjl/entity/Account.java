@@ -4,7 +4,16 @@ public class Account {
 
     private Integer id;
     private String name;
+    private String address;
     private String tel;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Integer getId() {
         return id;
@@ -35,7 +44,9 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
                 ", tel='" + tel + '\'' +
                 '}';
     }
+
 }
