@@ -1,6 +1,8 @@
 package com.hjl.entity;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
 
     private Integer id;
     private String name;

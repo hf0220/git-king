@@ -1,6 +1,8 @@
 package com.hjl.entity;
 
-public class school {
+import java.io.Serializable;
+
+public class School implements Serializable {
 
     private Integer id;
     private String schoolName;
@@ -32,7 +34,7 @@ public class school {
 
     @Override
     public String toString() {
-        return "school{" +
+        return "School{" +
                 "id=" + id +
                 ", schoolName='" + schoolName + '\'' +
                 ", tel=" + tel +

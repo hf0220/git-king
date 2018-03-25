@@ -1,14 +1,16 @@
 package com.hjl.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Student {
+public class Student implements Serializable {
 
     private Integer id;
     private String name;
     private Integer age;
     private Integer schoolId;
     private List<Tag> tagList;
+    private School school;
 
     public Integer getId() {
         return id;
@@ -50,6 +52,14 @@ public class Student {
         this.tagList = tagList;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -58,6 +68,7 @@ public class Student {
                 ", age=" + age +
                 ", schoolId=" + schoolId +
                 ", tagList=" + tagList +
+                ", school=" + school +
                 '}';
     }
 }

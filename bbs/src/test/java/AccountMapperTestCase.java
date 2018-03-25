@@ -1,52 +1,68 @@
 import com.hjl.entity.Account;
+import com.hjl.mapper.AccountMapper;
+import com.hjl.mapper.StudentMapper;
+import com.hjl.util.SqlSessionFactoryUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.Reader;
+import java.util.List;
 
 public class AccountMapperTestCase {
 
-    @Test
-    public void testFindById() throws Exception {
+    private SqlSession sqlSession;
+    private AccountMapper accountMapper;
 
-        // 1.加载配置文件
-        Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
-        // 2.创建SqlSessionFactory
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(reader);
-        // 3.创建SqlSession
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        // 4.操作数据库
-        // UserMapper.xml 的namespace + id
-        Account account = sqlSession.selectOne("com.hjl.mapper.AccountMapper.findById",1);
-        System.out.println(account);
+    @Before
+    public void init() {
+        // 自动提交事务
+        sqlSession = SqlSessionFactoryUtil.getSqlSession(true);
+        // 动态代理 动态生成
+        accountMapper = sqlSession.getMapper(AccountMapper.class);
+    }
+
+    @After
+    public void destroy() {
         // 5.关闭sqlSession
         sqlSession.close();
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindAll() {
+        List<Account> accountList = accountMapper.findAll();
+        for (Account account : accountList) {
+            System.out.println(account);
+        }
+    }
+
+    @Test
+    public void testFindById() {
+        Account account = accountMapper.findById(2);
+        System.out.println(account);
+    }
+
+    @Test
+    public void testUpdate() {
+//        Account account = accountMapper.findById(2);
+//        account.setTel("123");
+//       accountMapper.update(account);
+//        System.out.println(num);
+
+    }
+
+    @Test
+    public void testInsert() {
 
 
     }
 
     @Test
-    public void testUpdate() throws Exception {
-
-
-    }
-
-    @Test
-    public void testInsert() throws Exception {
-
-
-    }
-
-    @Test
-    public void testDelete() throws Exception {
+    public void testDelete() {
 
 
     }

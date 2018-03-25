@@ -9,4 +9,25 @@
         SELECT * FROM t_account WHERE id = #{id}
     </select>
 
+    <select id="findAll" resultType="Account">
+        SELECT * FROM t_account
+    </select>
+
+    <select id="page" resultType="Account" parameterType="map">
+        select * from t_account limit #{start}, #{size}
+    </select>
+
+    <insert id="save" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_account (name, address, tel) VALUES (#{name}, #{address}, #{tel})
+    </insert>
+
+    <update id="update" parameterType="Account">
+        update t_account set name = #{name}, address = #{address} tel = #{tel}
+        where id = #{id}
+      </update>
+
+    <delete id="delById">
+        delete from t_account where id = #{id}
+    </delete>
+
 </mapper>
